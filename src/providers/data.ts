@@ -1,4 +1,5 @@
 import { DataProvider, GetListParams, GetListResponse, BaseRecord } from "@refinedev/core";
+import { Mock_subjects } from "@/constants/Mock_subjects";
 
 export const dataProvider: DataProvider = {
   getList: async <TData extends BaseRecord = BaseRecord>({ resource }: GetListParams): Promise<GetListResponse<TData>> => {
@@ -8,9 +9,9 @@ export const dataProvider: DataProvider = {
       }
     }
     return {
-      data: [],
-      total: 0
-    }
+      data: Mock_subjects as unknown as TData[],
+      total: Mock_subjects.length
+    } 
   },
 
   getOne: async () => { throw new Error('This function is not present in mock ') },

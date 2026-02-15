@@ -41,6 +41,7 @@ export const classSchema = z.object({
             required_error: "Subject is required",
             invalid_type_error: "Subject is required",
         })
+        .int()
         .min(1, "Subject is required"),
     teacherId: z.string().min(1, "Teacher is required"),
     capacity: z.coerce
@@ -48,6 +49,7 @@ export const classSchema = z.object({
             required_error: "Capacity is required",
             invalid_type_error: "Capacity is required",
         })
+        .int()
         .min(1, "Capacity must be at least 1"),
     status: z.enum(["active", "inactive"]),
     bannerUrl: z
@@ -66,6 +68,7 @@ export const enrollmentSchema = z.object({
             required_error: "Class ID is required",
             invalid_type_error: "Class ID is required",
         })
+        .int()
         .min(1, "Class ID is required"),
     studentId: z.string().min(1, "Student ID is required"),
 });

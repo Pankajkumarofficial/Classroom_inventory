@@ -84,28 +84,37 @@ function UploadWidget({
 
     setIsRemoving(true);
 
+    let removed = true;
     try {
       if (deleteToken) {
         const params = new URLSearchParams();
         params.append("token", deleteToken);
 
-        await fetch(
+        const response = await fetch(
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/delete_by_token`,
           {
             method: "POST",
             body: params,
           }
         );
+
+        if (!response.ok) {
+          removed = false;
+          throw new Error(`Cloudinary delete failed: ${response.status}`);
+        }
       }
     } catch (error) {
+      removed = false;
       console.error("Failed to remove image from Cloudinary", error);
     } finally {
-      setPreview(null);
-      setDeleteToken(null);
-      onChangeRef.current?.(null);
+      if (removed) {
+        setPreview(null);
+        setDeleteToken(null);
+        onChangeRef.current?.(null);
+      }
       setIsRemoving(false);
     }
-  };
+  }
 
   return (
     <div className="space-y-2">

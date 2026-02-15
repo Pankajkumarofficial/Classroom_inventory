@@ -60,6 +60,7 @@ const ClassesCreate = () => {
       await onFinish(values);
     } catch (error) {
       console.error("Error creating class:", error);
+      throw error;
     }
   };
 

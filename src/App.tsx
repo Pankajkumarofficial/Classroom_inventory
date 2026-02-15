@@ -5,7 +5,7 @@ import routerProvider, {
   DocumentTitleHandler,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
-import { BookOpen, Home } from "lucide-react";
+import { BookOpen, GraduationCap, Home } from "lucide-react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./components/refine-ui/layout/layout";
@@ -16,6 +16,8 @@ import Dashboard from "./pages/Dashboard";
 import { dataProvider } from "./providers/data";
 import SubjectsList from "./pages/subjects/List";
 import SubjectsCreate from "./pages/subjects/Create";
+import List from "./pages/classes/List";
+import Create from "./pages/classes/Create";
 
 function App() {
   return (
@@ -43,7 +45,13 @@ function App() {
                   list: '/subjects',
                   create: '/subjects/create',
                   meta: { label: 'Subjects', icon: <BookOpen /> }
-                }
+                },
+                {
+                  name: "classes",
+                  list: '/classes',
+                  create: '/classes/create',
+                  meta: { label: 'Classes', icon: <GraduationCap /> }
+                },
               ]}
             >
               <Routes>
@@ -54,6 +62,10 @@ function App() {
                   <Route path="subjects">
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
+                  </Route>
+                  <Route path="classes">
+                    <Route index element={<List />} />
+                    <Route path="create" element={<Create />} />
                   </Route>
                 </Route>
               </Routes>
